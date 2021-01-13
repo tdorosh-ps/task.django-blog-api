@@ -1,0 +1,18 @@
+version: "3.9"
+   
+services:
+  db:
+    image: postgres:13.1
+    environment:
+      - POSTGRES_DB=blog
+      - POSTGRES_USER=admin
+      - POSTGRES_PASSWORD=rHya2Lm4fT
+  web:
+    build: .
+    command: python manage.py runserver 0.0.0.0:8000
+    volumes:
+      - .:/blog
+    ports:
+      - "8000:8000"
+    depends_on:
+      - db
